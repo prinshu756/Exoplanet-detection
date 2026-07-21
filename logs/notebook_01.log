@@ -1,0 +1,19 @@
+2026-07-21 13:02:57,635 | INFO | Notebook 01 Started
+2026-07-21 13:03:32,373 | INFO | Environment Verified
+2026-07-21 13:03:39,354 | INFO | Environment Verified
+2026-07-21 13:04:07,339 | INFO | Configuration Loaded Successfully
+2026-07-21 13:04:38,346 | INFO | Catalog URLs Loaded
+2026-07-21 13:05:30,430 | INFO | confirmed_planets downloaded.
+2026-07-21 13:05:54,063 | INFO | toi downloaded.
+2026-07-21 13:05:56,086 | INFO | ctoi downloaded.
+2026-07-21 13:10:00,992 | INFO | Confirmed planet catalog downloaded.
+2026-07-21 13:11:42,996 | INFO | Removed 0 duplicate rows
+2026-07-21 13:12:07,853 | INFO | Saved confirmed_planets_clean.csv
+2026-07-21 13:12:07,854 | INFO | Saved confirmed_planets_clean.parquet
+2026-07-21 13:12:07,857 | INFO | Clean catalog saved.
+2026-07-21 13:13:02,789 | INFO | Column names standardized.
+2026-07-21 13:17:06,254 | INFO | Statistics saved.
+2026-07-21 13:17:21,154 | INFO | Saved master_catalog.csv
+2026-07-21 13:17:21,158 | INFO | Saved master_catalog.parquet
+2026-07-21 13:17:21,159 | INFO | Master catalog saved.
+2026-07-21 13:18:08,342 | INFO | Notebook 01 Completed Successfully.
