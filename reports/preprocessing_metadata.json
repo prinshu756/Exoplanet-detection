@@ -1,0 +1,10 @@
+{
+    "Notebook": "03_Light_Curve_Preprocessing",
+    "Execution Time": "2026-07-23 12:01:00.041386",
+    "Processed Files": 89,
+    "Successful": 89,
+    "Failed": 0,
+    "Sigma": 5,
+    "Detrending": "Wotan Biweight",
+    "Normalization": "Median"
+}
