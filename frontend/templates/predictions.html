@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Predictions — Exoplanet Detection{% endblock %}
+{% block content %}
+<div class="space-y-12">
+  <div class="space-y-2">
+    <h1>Predictions</h1>
+    <p class="text-sm">Neural Network classification across all light curves</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-cell"><div class="stat-label">Light Curves</div><div class="stat-value">{{ candidates|length }}</div></div>
+    <div class="stat-cell"><div class="stat-label">Planet</div><div class="stat-value">{{ distribution.get('Planet', 0) }}</div></div>
+    <div class="stat-cell"><div class="stat-label">EB</div><div class="stat-value">{{ distribution.get('Eclipsing Binary', 0) }}</div></div>
+    <div class="stat-cell"><div class="stat-label">Blend</div><div class="stat-value">{{ distribution.get('Background Blend', 0) }}</div></div>
+    <div class="stat-cell"><div class="stat-label">Variable</div><div class="stat-value">{{ distribution.get('Stellar Variability', 0) }}</div></div>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>TIC ID</th>
+          <th>Link</th>
+          <th>NN Class</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in candidates %}
+        <tr>
+          <td class="font-medium">TIC {{ c.tic_id }}</td>
+          <td><a href="/candidates/{{ c.tic_id }}" style="text-decoration:underline;font-size:0.75rem;">view</a></td>
+          <td><strong>{{ c.nn_prediction }}</strong></td>
+          <td>{{ "%.1f"|format((c.nn_confidence or 0) * 100) }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% for c in candidates %}
+  <div class="card" style="padding: 1.5rem;">
+    <div class="flex items-center justify-between" style="margin-bottom: 0.75rem;">
+      <h2>TIC {{ c.tic_id }}</h2>
+      <span class="text-xs" style="color: var(--color-muted);"><strong>{{ c.nn_prediction }}</strong> &mdash; {{ "%.1f"|format((c.nn_confidence or 0) * 100) }}%</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

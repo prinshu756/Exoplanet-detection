@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}TIC {{ candidate.tic_id }} — Exoplanet Detection{% endblock %}
+{% block content %}
+<div class="space-y-10" style="max-width: 56rem; margin: 0 auto;">
+  <div class="flex items-center gap-3">
+    <a href="{{ url_for('candidates_list') }}" class="btn-ghost" style="padding: 0.25rem; display:flex;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </a>
+    <h1>TIC {{ candidate.tic_id }}</h1>
+  </div>
+
+  {% if candidate.nn_prediction %}
+  <div class="card" style="padding: 1.5rem;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+      <div style="padding: 1rem 1.25rem; background: var(--color-card);">
+        <div class="param-label">Neural Network</div>
+        <div class="text-lg font-medium">{{ candidate.nn_prediction }}</div>
+        <div class="text-xs" style="color: var(--color-muted);">{{ "%.1f"|format((candidate.nn_confidence or 0) * 100) }}% confidence</div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="space-y-3">
+    <h2>Parameters</h2>
+    <div class="param-grid">
+      {% set params = [
+        ("Period", candidate.orbital_period_days, "d"),
+        ("Radius", candidate.planet_radius_rearth, "R\u2295"),
+        ("Depth", candidate.transit_depth_ppm, "ppm"),
+        ("Duration", candidate.transit_duration_hours, "hr"),
+        ("Teq", candidate.equilibrium_temperature_k, "K"),
+        ("Teff", candidate.stellar_teff, "K"),
+        ("R\u2605", candidate.stellar_radius, "R\u2609"),
+        ("M\u2605", candidate.stellar_mass, "M\u2609"),
+        ("Impact", candidate.impact_parameter, ""),
+        ("Semi-major", candidate.semi_major_axis_au, "AU"),
+        ("Insolation", candidate.insolation_earth, "S\u2295"),
+        ("Red \u03c7\u00b2", candidate.red_chi2, ""),
+        ("Quality", candidate.quality_flag, ""),
+        ("Class", candidate.class_name, ""),
+        ("Atmosphere", candidate.atmosphere_class, ""),
+        ("Density", candidate.planet_density_gcc, "g/cm\u00b3"),
+      ] %}
+      {% for label, value, unit in params %}
+      <div class="param-cell">
+        <div class="param-label">{{ label }}</div>
+        <div class="param-value">
+          {% if value is not none and value == value %}
+            {% if value is string %}
+              {{ value }}
+            {% elif value < 0.01 %}{{ "%.2e"|format(value) }}{% else %}{{ "%.3f"|format(value) }}{% endif %}
+          {% else %}&mdash;{% endif %}
+          {% if value is not none and value is number and unit %}<span class="param-unit">{{ unit }}</span>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if candidate.planet_radius_rearth %}
+  <div class="card" style="padding: 1.25rem;">
+    <h2>Planet Parameters</h2>
+    <div class="flex flex-wrap gap-4" style="margin-top: 0.75rem;">
+      <div><span class="param-label">R_jup</span><div class="text-base font-medium">{{ "%.4f"|format(candidate.planet_radius_rjup) }}</div></div>
+      <div><span class="param-label">R_sun</span><div class="text-base font-medium">{{ "%.4f"|format(candidate.planet_radius_rsun) }}</div></div>
+      <div><span class="param-label">Radius Ratio</span><div class="text-base font-medium">{{ "%.4f"|format(candidate.radius_ratio) }}</div></div>
+      <div><span class="param-label">Transit Prob</span><div class="text-base font-medium">{{ "%.1f"|format(candidate.transit_probability) }}%</div></div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

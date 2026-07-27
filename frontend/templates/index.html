@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="space-y-12" style="max-width: 48rem; margin: 0 auto;">
+
+  <div class="space-y-3 text-center">
+    <h1>Exoplanet Detection</h1>
+    <p style="max-width: 32rem; margin: 0 auto;">
+      Neural network classification from noisy light curves. Upload a file or search known candidates.
+    </p>
+  </div>
+
+  {% if summary %}
+  <div class="card" style="padding: 1.25rem;">
+    <div class="stats-grid">
+      <div class="stat-cell"><div class="stat-label">Candidates</div><div class="stat-value">{{ summary.total }}</div></div>
+      <div class="stat-cell"><div class="stat-label">Planets</div><div class="stat-value">{{ summary.nn_counts.get('Planet', 0) }}</div></div>
+      <div class="stat-cell"><div class="stat-label">EB</div><div class="stat-value">{{ summary.nn_counts.get('Eclipsing Binary', 0) }}</div></div>
+      <div class="stat-cell"><div class="stat-label">Blend/Variable</div><div class="stat-value">{{ summary.nn_counts.get('Background Blend', 0) + summary.nn_counts.get('Stellar Variability', 0) }}</div></div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="space-y-4">
+    <input type="file" id="fileInput" accept=".parquet,.fits,.csv" style="display:none">
+    <div class="upload-zone" id="uploadZone">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p>Drop a light curve here or <span class="link">browse</span></p>
+      <p class="text-xs">Parquet, FITS, CSV &mdash; requires <strong>time</strong> and <strong>flux</strong> columns</p>
+    </div>
+    <div id="uploadStatus" class="text-sm text-center" style="display: none;"></div>
+  </div>
+
+  <div id="uploadResults" class="space-y-6" style="display: none;">
+    <div class="card" style="padding: 1.25rem;">
+      <div class="stats-grid" id="resultStats"></div>
+    </div>
+    <div id="resultProbabilities"></div>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid var(--color-border);">
+
+  <div class="space-y-4">
+    <div class="input-wrapper" style="max-width: 20rem;">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search TIC ID…" autocomplete="off">
+    </div>
+    <div id="searchResults" class="space-y-2"></div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var CANDIDATES = {{ candidates_json|safe }};
+
+var zone = document.getElementById('uploadZone');
+var fileInput = document.getElementById('fileInput');
+
+zone.addEventListener('click', function() { fileInput.click(); });
+zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', function() { zone.classList.remove('drag-over'); });
+zone.addEventListener('drop', function(e) { e.preventDefault(); zone.classList.remove('drag-over'); var f = e.dataTransfer.files[0]; if (f) handleUpload(f); });
+fileInput.addEventListener('change', function(e) { var f = e.target.files[0]; if (f) handleUpload(f); e.target.value = ''; });
+
+function showStatus(msg, isError) {
+  var el = document.getElementById('uploadStatus');
+  el.textContent = msg; el.style.display = 'block';
+  el.style.color = isError ? '#dc2626' : 'var(--color-muted)';
+}
+
+async function handleUpload(file) {
+  var ext = file.name.split('.').pop().toLowerCase();
+  if (!['parquet','fits','csv'].includes(ext)) {
+    showStatus('Unsupported format. Use .parquet, .fits, or .csv', true);
+    return;
+  }
+  showStatus('Analyzing…', false);
+  document.getElementById('uploadResults').style.display = 'none';
+  var fd = new FormData();
+  fd.append('file', file);
+  try {
+    var r = await fetch('/api/analyze', { method: 'POST', body: fd });
+    var d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Analysis failed');
+    showResults(d);
+  } catch (e) {
+    showStatus(e.message, true);
+  }
+}
+
+function showResults(d) {
+  document.getElementById('uploadStatus').style.display = 'none';
+  var r = document.getElementById('uploadResults');
+  r.style.display = 'block';
+  document.getElementById('resultStats').innerHTML =
+    '<div class="stat-cell"><div class="stat-label">Points</div><div class="stat-value">' + (d.n_points || '—') + '</div></div>' +
+    '<div class="stat-cell"><div class="stat-label">Period</div><div class="stat-value">' + (d.tls_period ? Number(d.tls_period).toFixed(4) : '—') + ' <span class="stat-unit">d</span></div></div>' +
+    '<div class="stat-cell"><div class="stat-label">SDE</div><div class="stat-value">' + (d.tls_sde ? Number(d.tls_sde).toFixed(2) : '—') + '</div></div>' +
+    '<div class="stat-cell"><div class="stat-label">Prediction</div><div class="stat-value-sm">' + (d.prediction || '—') + '</div></div>';
+  var pHtml = '';
+  if (d.probabilities) {
+    var sorted = Object.entries(d.probabilities).sort(function(a, b) { return b[1] - a[1]; });
+    pHtml += '<div class="card" style="padding: 1.25rem;"><h2>Neural Network Probabilities</h2><div class="space-y-1" style="margin-top: 0.75rem;">';
+    sorted.forEach(function(p) {
+      var cls = p[0], prob = p[1];
+      var pct = (prob * 100).toFixed(1);
+      var clsClass = cls.includes('Planet') ? 'planet' : cls.includes('Eclipsing') || cls.includes('Binary') ? 'eb' : cls.includes('Background') || cls.includes('Blend') ? 'blend' : 'variable';
+      pHtml += '<div class="flex items-center gap-2"><span class="text-xs" style="width: 8rem;">' + cls + '</span><div class="progress-bar-bg"><div class="progress-bar-fill ' + clsClass + '" style="width:0%"></div></div><span class="text-xs" style="width:3rem; text-align:right; color:var(--color-muted);">' + pct + '%</span></div>';
+    });
+    pHtml += '</div></div>';
+  }
+  document.getElementById('resultProbabilities').innerHTML = pHtml;
+  setTimeout(function() {
+    document.querySelectorAll('.progress-bar-fill').forEach(function(el, i) {
+      var sorted2 = Object.entries(d.probabilities).sort(function(a, b) { return b[1] - a[1]; });
+      el.style.width = (sorted2[i][1] * 100) + '%';
+    });
+  }, 100);
+  r.scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  var q = this.value.trim();
+  var r = document.getElementById('searchResults');
+  if (!q) { r.style.display = 'none'; r.innerHTML = ''; return; }
+  var m = CANDIDATES.filter(function(c) { return String(c.tic_id).includes(q); }).slice(0, 6);
+  r.style.display = 'block';
+  if (m.length === 0) {
+    r.innerHTML = '<p class="text-xs" style="color:var(--color-muted)">No results for TIC ' + q + '</p>';
+    return;
+  }
+  r.innerHTML = m.map(function(c) {
+    return '<a href="/candidates/' + c.tic_id + '" class="list-item"><span class="font-medium">TIC ' + c.tic_id + '</span><div class="list-item-meta"><span>' + (c.nn_prediction || c.class_name || '—') + '</span><span>' + (c.planet_radius_rearth ? Number(c.planet_radius_rearth).toFixed(2) + ' R\u2295' : '') + '</span><svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></a>';
+  }).join('');
+});
+</script>
+{% endblock %}

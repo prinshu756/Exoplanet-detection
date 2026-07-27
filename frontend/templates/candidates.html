@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Candidates — Exoplanet Detection{% endblock %}
+{% block content %}
+<div class="space-y-8">
+  <div class="flex items-center justify-between flex-wrap gap-4">
+    <div class="space-y-1">
+      <h1>Candidates</h1>
+      <p class="text-sm">{{ candidates|length }} detections from the pipeline</p>
+    </div>
+    <div class="input-wrapper" style="max-width: 18rem;">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Filter TIC ID or class…" oninput="filterTable()" autocomplete="off">
+    </div>
+  </div>
+
+  <div style="overflow-x: auto; border: 1px solid var(--color-border); border-radius: 0.5rem;">
+    <table>
+      <thead>
+        <tr>
+          <th class="sortable" onclick="sortBy(0)">TIC ID <span class="sort-arrow" id="sortArrow0"></span></th>
+          <th class="sortable" onclick="sortBy(1)">Period <span class="sort-arrow" id="sortArrow1"></span></th>
+          <th class="sortable" onclick="sortBy(2)">Radius <span class="sort-arrow" id="sortArrow2"></span></th>
+          <th class="sortable" onclick="sortBy(3)">Class <span class="sort-arrow" id="sortArrow3"></span></th>
+          <th class="sortable" onclick="sortBy(4)">Confidence <span class="sort-arrow" id="sortArrow4"></span></th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        {% for c in candidates %}
+        <tr onclick="window.location='/candidates/{{ c.tic_id }}'" style="cursor: pointer;">
+          <td class="font-medium">TIC {{ c.tic_id }}</td>
+          <td data-val="{{ c.orbital_period_days or 0 }}">{{ "%.3f"|format(c.orbital_period_days) if c.orbital_period_days else '—' }}</td>
+          <td data-val="{{ c.planet_radius_rearth or 0 }}">{{ "%.2f"|format(c.planet_radius_rearth) if c.planet_radius_rearth else '—' }}</td>
+          <td>
+            {% set cls = c.nn_prediction or c.class_name or '—' %}
+            <span class="badge {% if cls == 'Planet' %}badge-Planet{% elif 'Eclipsing' in cls %}badge-Eclipsing{% elif 'Background' in cls %}badge-Background{% elif 'Stellar' in cls %}badge-Stellar{% endif %}">{{ cls }}</span>
+          </td>
+          <td data-val="{{ c.nn_confidence or 0 }}">{{ "%.0f"|format((c.nn_confidence or 0) * 100) }}%</td>
+          <td><a href="/candidates/{{ c.tic_id }}" class="text-xs" style="color: var(--color-accent);">view</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var sortCol = -1, sortAsc = true;
+
+function filterTable() {
+  var q = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('#tableBody tr').forEach(function(r) {
+    r.style.display = r.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortAsc = !sortAsc;
+  else { sortCol = col; sortAsc = true; }
+  var arrows = document.querySelectorAll('.sort-arrow');
+  arrows.forEach(function(a) { a.textContent = ''; });
+  var arrow = document.getElementById('sortArrow' + col);
+  arrow.textContent = sortAsc ? '\u25B2' : '\u25BC';
+  var tbody = document.getElementById('tableBody');
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  rows.sort(function(a, b) {
+    var va = a.cells[col].getAttribute('data-val');
+    var vb = b.cells[col].getAttribute('data-val');
+    if (va !== null && vb !== null) return sortAsc ? (parseFloat(va) - parseFloat(vb)) : (parseFloat(vb) - parseFloat(va));
+    var ta = a.cells[col].textContent.trim().toLowerCase();
+    var tb = b.cells[col].textContent.trim().toLowerCase();
+    return sortAsc ? ta.localeCompare(tb) : tb.localeCompare(ta);
+  });
+  rows.forEach(function(r) { tbody.appendChild(r); });
+}
+</script>
+{% endblock %}

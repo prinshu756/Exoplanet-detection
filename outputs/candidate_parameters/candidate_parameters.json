@@ -22,7 +22,7 @@
     "red_chi2": 1.0112065046337124,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -48,7 +48,7 @@
     "red_chi2": 1.0860250337095732,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -74,7 +74,7 @@
     "red_chi2": 1.0014988761728747,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -100,7 +100,7 @@
     "red_chi2": 1.0053371774628648,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -126,7 +126,7 @@
     "red_chi2": 1.0139466195599884,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -152,7 +152,7 @@
     "red_chi2": 1.0401366134267371,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -178,7 +178,7 @@
     "red_chi2": 1.0146563566642637,
     "quality_flag": "PASS",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -204,7 +204,7 @@
     "red_chi2": 1.0017731112963444,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -230,7 +230,7 @@
     "red_chi2": 1.0033328525056815,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -256,7 +256,7 @@
     "red_chi2": 1.001344205397714,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -282,7 +282,7 @@
     "red_chi2": 1.001344205397714,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -308,7 +308,7 @@
     "red_chi2": 1.0210136102421705,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -334,7 +334,7 @@
     "red_chi2": 1.001344205397714,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -360,7 +360,7 @@
     "red_chi2": 1.002349778376769,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -386,7 +386,7 @@
     "red_chi2": 1.0049865521643317,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -412,7 +412,7 @@
     "red_chi2": 1.0049865521643317,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -438,7 +438,7 @@
     "red_chi2": 1.005360181942675,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -464,7 +464,7 @@
     "red_chi2": 1.005360181942675,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -490,7 +490,7 @@
     "red_chi2": 1.0008126995896571,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -516,7 +516,7 @@
     "red_chi2": 1.0032397255745573,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -542,7 +542,7 @@
     "red_chi2": 1.0020367746853067,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -568,7 +568,7 @@
     "red_chi2": 1.0008126995896571,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   },
   {
@@ -594,7 +594,7 @@
     "red_chi2": 1.0008126995896571,
     "quality_flag": "REVIEW",
     "class_name": "Planet",
-    "planet_density_gcc": NaN,
+    "planet_density_gcc": null,
     "atmosphere_class": "Unknown"
   }
 ]

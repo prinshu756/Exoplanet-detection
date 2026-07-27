@@ -2,3 +2,32 @@
 2026-07-28 00:51:25,243 | INFO | Feature extraction functions defined
 2026-07-28 00:51:25,363 | INFO | Candidate catalog: 89 rows
 2026-07-28 00:51:25,363 | INFO | Labels: 89 rows
+2026-07-28 00:51:27,321 | INFO | Features extracted: 89 samples x 51 columns
+2026-07-28 00:51:27,348 | INFO | Merged data: 89 samples, 53 columns
+2026-07-28 00:51:27,730 | INFO | NN model loaded, all parameters on cuda:0
+2026-07-28 00:51:27,730 | INFO | All models loaded successfully
+2026-07-28 00:51:28,620 | INFO | Train: 71, Test: 18
+2026-07-28 00:51:28,678 | INFO | Feature table saved: (89, 53)
+2026-07-28 00:51:31,197 | INFO | RF feature importance plotted and saved
+2026-07-28 00:52:16,555 | INFO | Permutation importance computed and saved
+2026-07-28 00:52:30,600 | INFO | SHAP explanations computed for 4 classes
+2026-07-28 00:52:35,177 | INFO | SHAP dependence plots saved for class 0
+2026-07-28 00:52:42,457 | INFO | Feature distribution plots saved
+2026-07-28 00:52:50,764 | INFO | Correlation heatmap saved
+2026-07-28 00:53:13,732 | INFO | Waterfall plots generated
+2026-07-28 00:53:16,143 | INFO | Force plot generated
+2026-07-28 00:53:18,536 | INFO | Prediction probability plots saved
+2026-07-28 00:53:21,364 | INFO | Confusion matrices saved
+2026-07-28 00:53:22,564 | INFO | Per-class metrics plotted
+2026-07-28 00:53:24,857 | INFO | ROC curves saved
+2026-07-28 00:53:26,462 | INFO | PR curves saved
+2026-07-28 00:53:28,384 | INFO | Calibration curves saved
+2026-07-28 00:53:31,729 | INFO | Confidence distribution saved
+2026-07-28 00:53:32,885 | INFO | Misclassification analysis complete: RF=7, NN=8
+2026-07-28 00:53:34,906 | INFO | Feature importance comparison figure saved
+2026-07-28 00:53:36,023 | INFO | Grouped importance figure saved
+2026-07-28 00:53:44,280 | INFO | Research dashboard saved
+2026-07-28 00:53:46,880 | INFO | Interactive visualizations saved
+2026-07-28 00:53:47,111 | INFO | Research report generated
+2026-07-28 00:53:47,133 | INFO | Local explanations saved for 10 samples
+2026-07-28 00:53:47,281 | INFO | Notebook 07 — Explainable AI completed successfully

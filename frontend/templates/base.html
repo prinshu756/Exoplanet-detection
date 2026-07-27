@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Exoplanet Detection{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="app-header">
+    <a href="{{ url_for('index') }}" class="logo">Exoplanet Detection</a>
+    <nav>
+      <a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Analyze</a>
+      <a href="{{ url_for('candidates_list') }}" class="{% if request.endpoint == 'candidates_list' %}active{% endif %}">Candidates</a>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">&#9681;</button>
+    </nav>
+  </header>
+  <main class="app-main">
+    {% block content %}{% endblock %}
+  </main>
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.classList.add('dark');
+      document.getElementById('themeToggle')?.addEventListener('click', function() {
+        var d = document.documentElement;
+        d.classList.toggle('dark');
+        localStorage.setItem('theme', d.classList.contains('dark') ? 'dark' : 'light');
+      });
+    })();
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
