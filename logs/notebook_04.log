@@ -3,3 +3,321 @@
 2026-07-23 23:44:53,570 | INFO | Setup completed successfully.
 2026-07-23 23:44:58,434 | INFO | Notebook 04 Started
 2026-07-23 23:44:58,951 | INFO | Setup completed successfully.
+2026-07-27 17:44:34,003 | INFO | Notebook 04 Started
+2026-07-27 17:44:43,327 | INFO | Notebook 04 Started
+2026-07-27 17:45:14,029 | INFO | Setup completed successfully.
+2026-07-27 17:50:01,127 | INFO | === Starting Batch Transit Detection ===
+2026-07-27 17:50:19,951 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:50:47,479 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:51:12,383 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:51:38,992 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:52:06,202 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:52:32,215 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:52:57,573 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:56:05,484 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:56:31,905 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:56:56,529 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:57:16,490 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:57:37,897 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:58:03,293 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:58:29,323 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:58:50,905 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:59:12,519 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:59:35,972 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 17:59:58,923 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:00:21,257 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:00:42,064 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:01:05,985 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:01:25,828 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:01:55,404 | WARNING | BLS failed: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:08:12,977 | INFO | Notebook 04 Started
+2026-07-27 18:08:14,018 | INFO | Setup completed successfully.
+2026-07-27 18:08:40,287 | INFO | === Starting Batch Transit Detection ===
+2026-07-27 18:08:59,231 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:09:30,187 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:09:54,864 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:10:21,029 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:10:49,892 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:11:17,961 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:11:42,626 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:14:46,562 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:15:07,531 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:15:26,833 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:15:47,604 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:16:09,896 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:16:37,226 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:17:02,021 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:17:23,548 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:17:46,313 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:18:08,344 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:18:31,913 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:18:57,230 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:19:18,759 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:19:38,713 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:19:57,129 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:20:19,795 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:20:42,619 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:20:59,389 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:21:20,145 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:21:38,547 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:21:55,100 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:22:15,154 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:22:38,656 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:23:01,893 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:23:25,409 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:23:45,087 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:24:05,082 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:24:24,104 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:24:42,296 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 18:45:52,785 | INFO | Notebook 04 Started
+2026-07-27 18:45:53,568 | INFO | Setup completed successfully.
+2026-07-27 19:01:51,229 | INFO | Notebook 04 Started
+2026-07-27 19:01:52,166 | INFO | Setup completed successfully.
+2026-07-27 19:02:14,326 | INFO | === Starting Batch Transit Detection ===
+2026-07-27 19:02:31,795 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:02:59,359 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:03:19,549 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:03:41,241 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:04:01,753 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:04:23,468 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:04:43,070 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:07:27,599 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:07:46,369 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:08:05,123 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:08:23,835 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:08:44,727 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:09:07,678 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:09:31,069 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:09:50,917 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:10:11,716 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:10:32,512 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:10:54,929 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:11:15,656 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:11:33,982 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:11:54,953 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:12:13,636 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:12:35,951 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:12:59,509 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:13:17,417 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:13:37,967 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:13:56,192 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:14:13,451 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:14:32,865 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:14:56,739 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:15:20,144 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:15:43,328 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:16:02,829 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:16:23,980 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:16:43,577 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:17:01,023 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:18:58,787 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:19:22,095 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:19:40,109 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:20:01,016 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:20:21,633 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:20:42,810 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:21:04,282 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:21:25,344 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:21:46,425 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:22:06,989 | WARNING | BLS: Unrecognized method '0.5'
+allowed methods are: ['snr', 'likelihood']
+2026-07-27 19:37:14,371 | INFO | Notebook 04 Started
+2026-07-27 19:37:15,134 | INFO | Setup completed successfully.
+2026-07-27 19:37:38,732 | INFO | === Starting Batch Transit Detection ===
+2026-07-27 19:37:38,736 | INFO | GPU memory: 3305 MB free / 4095 MB total
+2026-07-27 19:37:58,489 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:38:30,388 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:38:53,065 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:39:15,384 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:39:36,563 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:39:58,411 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:40:17,575 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:42:58,863 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:43:17,734 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:43:37,238 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:43:56,217 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:44:15,546 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:44:38,549 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:45:01,886 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:45:21,512 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:45:41,692 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:46:02,230 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:46:23,665 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:46:44,062 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:47:02,451 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:47:24,185 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:47:43,196 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:48:06,438 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:48:30,921 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:48:48,790 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:49:16,120 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:49:43,616 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:50:05,980 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:50:32,785 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:51:03,099 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:51:32,960 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:52:03,866 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:52:31,399 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:52:58,280 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:53:27,489 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:53:53,539 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:56:11,409 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:56:40,637 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:57:04,103 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:57:32,007 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:57:59,794 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:58:27,246 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:58:57,243 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:59:25,890 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 19:59:53,514 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:00:20,778 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:00:49,337 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:01:25,973 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:01:45,882 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:02:09,715 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:02:32,590 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:03:05,568 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:03:37,583 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:04:11,840 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:04:43,914 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:05:11,777 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:05:42,345 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:06:10,459 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:06:45,901 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:07:12,365 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:07:41,236 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:08:07,740 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:08:34,374 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:09:04,748 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:09:29,792 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:09:53,905 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:10:26,687 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:10:50,635 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:11:21,142 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:11:48,415 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:12:13,477 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:12:39,131 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:13:05,716 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:13:38,423 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:14:10,000 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:14:42,201 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:15:10,635 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:15:40,595 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:16:10,085 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:16:41,788 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:17:07,293 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:17:35,284 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:18:02,029 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:19:10,791 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:19:33,441 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:20:06,055 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:20:35,800 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:22:02,653 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:23:28,700 | WARNING | BLS: Failed to find CUDA headers. Please install CUDA toolkit headers (e.g., pip install cupy-cuda12x[ctk]) or specify CUDA_PATH environment variable.
+2026-07-27 20:23:28,708 | INFO | GPU memory after processing: 3303 MB free
+2026-07-27 20:23:28,710 | INFO | Done. 89 processed, 0 failed
+2026-07-27 20:23:30,362 | INFO | === Notebook 04 Completed Successfully ===
