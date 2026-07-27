@@ -1,0 +1,23 @@
+============================================================
+EXOPLANET TRANSIT PARAMETER ESTIMATION REPORT
+============================================================
+
+Total candidates analyzed: 23
+  Confirmed: 1
+  Promising: 22
+  Uncertain: 0
+
+Average quality score: 0.658
+Average planet radius: 0.70 R_Earth
+Average equilibrium temperature: 1136 K
+
+MCMC complete: 0
+
+Top 5 candidates by quality:
+  TIC 152476657: score=0.715 (CONFIRMED)
+  TIC 288246496: score=0.697 (PROMISING)
+  TIC 460396820: score=0.685 (PROMISING)
+  TIC 375654303: score=0.678 (PROMISING)
+  TIC 137637249: score=0.672 (PROMISING)
+
+============================================================

@@ -1,0 +1,110 @@
+{
+  "method": "Random Forest Feature Importance + SHAP",
+  "total_features": 50,
+  "top_features": [
+    {
+      "feature": "transit_sde",
+      "importance": 0.19476446752421447,
+      "rank": 1
+    },
+    {
+      "feature": "transit_transit_snr",
+      "importance": 0.10724520682393271,
+      "rank": 2
+    },
+    {
+      "feature": "second_frequency",
+      "importance": 0.03901359200492087,
+      "rank": 3
+    },
+    {
+      "feature": "power_concentration",
+      "importance": 0.03876497375861783,
+      "rank": 4
+    },
+    {
+      "feature": "kurtosis",
+      "importance": 0.03137441919374727,
+      "rank": 5
+    },
+    {
+      "feature": "third_frequency",
+      "importance": 0.03025929096639516,
+      "rank": 6
+    },
+    {
+      "feature": "transit_duration",
+      "importance": 0.029417596424709477,
+      "rank": 7
+    },
+    {
+      "feature": "harmonic_ratio",
+      "importance": 0.022677882089976842,
+      "rank": 8
+    },
+    {
+      "feature": "dominant_period",
+      "importance": 0.021444539388715544,
+      "rank": 9
+    },
+    {
+      "feature": "skewness",
+      "importance": 0.02136056440138624,
+      "rank": 10
+    },
+    {
+      "feature": "largest_gap_days",
+      "importance": 0.019148700000334393,
+      "rank": 11
+    },
+    {
+      "feature": "time_span_hours",
+      "importance": 0.01863906226502328,
+      "rank": 12
+    },
+    {
+      "feature": "transit_period",
+      "importance": 0.018483367046417322,
+      "rank": 13
+    },
+    {
+      "feature": "dominant_frequency",
+      "importance": 0.01825014459324171,
+      "rank": 14
+    },
+    {
+      "feature": "rms",
+      "importance": 0.017394632002353857,
+      "rank": 15
+    }
+  ],
+  "class_mapping": {
+    "0": "0",
+    "1": "1",
+    "2": "2",
+    "3": "3"
+  },
+  "astrophysical_summary": {
+    "planet_discriminators": [
+      "transit_sde",
+      "transit_period",
+      "transit_transit_snr",
+      "transit_depth",
+      "transit_duration"
+    ],
+    "binary_discriminators": [
+      "harmonic_ratio",
+      "dominant_frequency",
+      "skewness",
+      "kurtosis",
+      "std_flux"
+    ],
+    "noise_variability_discriminators": [
+      "spectral_entropy",
+      "gap_fraction",
+      "rms",
+      "flux_entropy",
+      "dynamic_range"
+    ]
+  }
+}

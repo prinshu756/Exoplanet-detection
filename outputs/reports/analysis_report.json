@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-07-28T00:42:42.308869",
+  "n_candidates": 23,
+  "n_validated": 1,
+  "n_promising": 22,
+  "top_candidates": [
+    {
+      "tic_id": 152476657,
+      "quality_score": 0.7152211223732385
+    },
+    {
+      "tic_id": 288246496,
+      "quality_score": 0.6973951580853576
+    },
+    {
+      "tic_id": 460396820,
+      "quality_score": 0.6847520591354466
+    },
+    {
+      "tic_id": 375654303,
+      "quality_score": 0.6778924081158716
+    },
+    {
+      "tic_id": 137637249,
+      "quality_score": 0.6721774280868704
+    }
+  ],
+  "fit_statistics": {
+    "median_red_chi2": 1.0033328525056815,
+    "median_r2": 0.010993309221764114
+  }
+}

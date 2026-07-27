@@ -1,0 +1,26 @@
+{
+  "n_samples": 89,
+  "n_features": 50,
+  "n_classes": 4,
+  "class_distribution": {
+    "Stellar Variability": 23,
+    "Planet": 22,
+    "Eclipsing Binary": 22,
+    "Background Blend": 22
+  },
+  "rf_test_accuracy": 0.6111111111111112,
+  "nn_test_accuracy": 0.5555555555555556,
+  "rf_f1_weighted": 0.6177248677248677,
+  "nn_f1_weighted": 0.5501042167708834,
+  "n_test_samples": 18,
+  "n_train_samples": 71,
+  "top_5_features": [
+    "transit_sde",
+    "transit_transit_snr",
+    "second_frequency",
+    "power_concentration",
+    "kurtosis"
+  ],
+  "misclassification_rate_rf": 0.38888888888888884,
+  "misclassification_rate_nn": 0.4444444444444444
+}

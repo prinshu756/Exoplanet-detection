@@ -1,0 +1,12 @@
+{
+  "n_candidates": 23,
+  "n_confirmed": 1,
+  "n_promising": 22,
+  "n_uncertain": 0,
+  "median_period": 3.4497911845580957,
+  "median_radius": 0.6830222169649157,
+  "median_teq": 1037.274607118726,
+  "median_chi2": 1.0033328525056815,
+  "median_quality": 0.6700365359255127,
+  "n_mcmc": 3
+}

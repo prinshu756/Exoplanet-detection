@@ -1,0 +1,362 @@
+[
+  {
+    "sample_index": 0,
+    "tic_id": 170647523,
+    "true_class": 3,
+    "predicted_class": 2,
+    "true_class_name": "3",
+    "predicted_class_name": "2",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.10313151538593156,
+        "feature_value": -0.824966489914825
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": 0.04226610320392686,
+        "feature_value": -0.235089188164734
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.022974673290774506,
+        "feature_value": -0.4844593328037386
+      },
+      {
+        "feature": "second_power",
+        "shap_value": 0.012508242450909006,
+        "feature_value": 1.5705688251774939
+      },
+      {
+        "feature": "gap_fraction",
+        "shap_value": -0.01227246904975389,
+        "feature_value": -0.7235184293803586
+      }
+    ]
+  },
+  {
+    "sample_index": 1,
+    "tic_id": 159521326,
+    "true_class": 1,
+    "predicted_class": 1,
+    "true_class_name": "1",
+    "predicted_class_name": "1",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.02823590898598566,
+        "feature_value": -0.37987210118493103
+      },
+      {
+        "feature": "transit_duration",
+        "shap_value": 0.02350297288325006,
+        "feature_value": 2.636186004117725
+      },
+      {
+        "feature": "third_frequency",
+        "shap_value": -0.017827253749978417,
+        "feature_value": 0.020265782849711634
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": 0.01579290455820504,
+        "feature_value": -0.2555088899132394
+      },
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.015215783435511535,
+        "feature_value": -0.09113729906065714
+      }
+    ]
+  },
+  {
+    "sample_index": 2,
+    "tic_id": 152476657,
+    "true_class": 0,
+    "predicted_class": 0,
+    "true_class_name": "0",
+    "predicted_class_name": "0",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": 0.15789764362733655,
+        "feature_value": 3.2919998591228596
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": 0.09238889835638255,
+        "feature_value": 6.196071358288006
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": 0.05707428150314824,
+        "feature_value": 3.4183364139847647
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": 0.05071222255099051,
+        "feature_value": -0.857145900148729
+      },
+      {
+        "feature": "third_frequency",
+        "shap_value": 0.04335617032176826,
+        "feature_value": -0.5857246333685571
+      }
+    ]
+  },
+  {
+    "sample_index": 3,
+    "tic_id": 230061010,
+    "true_class": 0,
+    "predicted_class": 0,
+    "true_class_name": "0",
+    "predicted_class_name": "0",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": 0.08593704527127864,
+        "feature_value": 3.4657467043772634
+      },
+      {
+        "feature": "transit_sde",
+        "shap_value": 0.0635486931460897,
+        "feature_value": 0.0002948872825499444
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": 0.05946981291186873,
+        "feature_value": 11.451006150100383
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": 0.059334445080887324,
+        "feature_value": -0.857703085238392
+      },
+      {
+        "feature": "third_frequency",
+        "shap_value": 0.03767140465489443,
+        "feature_value": -0.5826944717964521
+      }
+    ]
+  },
+  {
+    "sample_index": 4,
+    "tic_id": 184247532,
+    "true_class": 1,
+    "predicted_class": 1,
+    "true_class_name": "1",
+    "predicted_class_name": "1",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": -0.06293241745443312,
+        "feature_value": -0.3259337526406107
+      },
+      {
+        "feature": "transit_sde",
+        "shap_value": 0.05132072239550024,
+        "feature_value": -0.011871493232934969
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": -0.02267178939470508,
+        "feature_value": -0.2519318654542202
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.022596382618631033,
+        "feature_value": -0.6540612627193652
+      },
+      {
+        "feature": "kurtosis",
+        "shap_value": 0.014629897531843922,
+        "feature_value": -0.0044594366603543925
+      }
+    ]
+  },
+  {
+    "sample_index": 5,
+    "tic_id": 121395761,
+    "true_class": 3,
+    "predicted_class": 3,
+    "true_class_name": "3",
+    "predicted_class_name": "3",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.09297229766817088,
+        "feature_value": -0.644965579215996
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": -0.04355745274532029,
+        "feature_value": -0.2894010429007057
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.02199069808785857,
+        "feature_value": 0.5735949614425069
+      },
+      {
+        "feature": "transit_duration",
+        "shap_value": 0.01994771612461844,
+        "feature_value": 1.3059388335612945
+      },
+      {
+        "feature": "third_frequency",
+        "shap_value": -0.01032127502835438,
+        "feature_value": 0.5957344713806008
+      }
+    ]
+  },
+  {
+    "sample_index": 6,
+    "tic_id": 138805992,
+    "true_class": 0,
+    "predicted_class": 2,
+    "true_class_name": "0",
+    "predicted_class_name": "2",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": 0.14606883701650814,
+        "feature_value": 0.35906026059413976
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": -0.07350064081649374,
+        "feature_value": -0.3136848636695256
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": -0.021636800895589812,
+        "feature_value": -0.29238912054947314
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.02136489690030233,
+        "feature_value": -0.4354385752889052
+      },
+      {
+        "feature": "kurtosis",
+        "shap_value": 0.016858970020325423,
+        "feature_value": 0.38235876273039804
+      }
+    ]
+  },
+  {
+    "sample_index": 7,
+    "tic_id": 27843776,
+    "true_class": 3,
+    "predicted_class": 2,
+    "true_class_name": "3",
+    "predicted_class_name": "2",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.10823301615890835,
+        "feature_value": -0.9329944020002745
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": 0.04354886291990426,
+        "feature_value": -0.2433996722587375
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.021322527219441643,
+        "feature_value": -0.1919675250190411
+      },
+      {
+        "feature": "skewness",
+        "shap_value": -0.013043529290478693,
+        "feature_value": -0.05145519305214613
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": 0.012757214963511966,
+        "feature_value": -0.14476090631456262
+      }
+    ]
+  },
+  {
+    "sample_index": 8,
+    "tic_id": 158487108,
+    "true_class": 2,
+    "predicted_class": 2,
+    "true_class_name": "2",
+    "predicted_class_name": "2",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.07975848637521828,
+        "feature_value": -0.5205851119503093
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": -0.05633355491076097,
+        "feature_value": -0.3409744815686503
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": -0.017241830616426937,
+        "feature_value": -0.328888414992785
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.014817888449771813,
+        "feature_value": 0.7774044783149686
+      },
+      {
+        "feature": "kurtosis",
+        "shap_value": 0.013894200272438949,
+        "feature_value": 0.0345533754836479
+      }
+    ]
+  },
+  {
+    "sample_index": 9,
+    "tic_id": 137558813,
+    "true_class": 2,
+    "predicted_class": 2,
+    "true_class_name": "2",
+    "predicted_class_name": "2",
+    "base_value": 0.24684507042253642,
+    "top_contributions": [
+      {
+        "feature": "transit_sde",
+        "shap_value": -0.07472118755794274,
+        "feature_value": -0.4505761032078873
+      },
+      {
+        "feature": "transit_transit_snr",
+        "shap_value": -0.05115265738275991,
+        "feature_value": -0.3248274458541313
+      },
+      {
+        "feature": "second_frequency",
+        "shap_value": -0.019257449558650785,
+        "feature_value": 1.1595951766518604
+      },
+      {
+        "feature": "power_concentration",
+        "shap_value": -0.013494441579122812,
+        "feature_value": -0.24668924250725027
+      },
+      {
+        "feature": "kurtosis",
+        "shap_value": -0.011336387105192655,
+        "feature_value": -0.32407740478518227
+      }
+    ]
+  }
+]
