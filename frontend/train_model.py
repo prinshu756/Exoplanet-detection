@@ -10,6 +10,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.feature_selection import VarianceThreshold
 from sklearn.metrics import accuracy_score, f1_score, classification_report
 from feature_utils import extract_features_from_lc_df, features_to_array, FEATURE_NAMES
 
@@ -26,18 +27,35 @@ torch.manual_seed(42)
 np.random.seed(42)
 
 
+class LabelSmoothCrossEntropy(nn.Module):
+    def __init__(self, smoothing=0.1):
+        super().__init__()
+        self.smoothing = smoothing
+
+    def forward(self, pred, target):
+        n_classes = pred.size(1)
+        one_hot = torch.zeros_like(pred).scatter_(1, target.unsqueeze(1), 1)
+        smooth_labels = one_hot * (1 - self.smoothing) + self.smoothing / n_classes
+        log_probs = torch.log_softmax(pred, dim=1)
+        return -(smooth_labels * log_probs).sum(dim=1).mean()
+
+
 class TransitClassifier(nn.Module):
     def __init__(self, input_dim=50, num_classes=4):
         super().__init__()
         self.net = nn.Sequential(
-            nn.Linear(input_dim, 64),
-            nn.BatchNorm1d(64),
+            nn.Linear(input_dim, 96),
+            nn.BatchNorm1d(96),
+            nn.ReLU(),
+            nn.Dropout(0.35),
+            nn.Linear(96, 48),
+            nn.BatchNorm1d(48),
             nn.ReLU(),
             nn.Dropout(0.25),
-            nn.Linear(64, 32),
+            nn.Linear(48, 24),
             nn.ReLU(),
             nn.Dropout(0.15),
-            nn.Linear(32, num_classes),
+            nn.Linear(24, num_classes),
         )
 
     def forward(self, x):
@@ -49,16 +67,25 @@ def load_real_data():
     catalog = pd.read_parquet(os.path.join(CANDIDATES, "candidate_catalog.parquet"))
     candidate_map = catalog.set_index("tic_id").to_dict(orient="index")
 
+    lc_index = {}
+    for fname in os.listdir(LIGHTCURVES):
+        if not fname.endswith(".parquet"):
+            continue
+        parts = fname.replace(".parquet", "").split("_")
+        try:
+            tic_idx = parts.index("TIC") + 1
+            tic = int(parts[tic_idx])
+            lc_index.setdefault(tic, []).append(fname)
+        except (ValueError, IndexError):
+            continue
+
     records = []
     for _, row in labels.iterrows():
         tic = row["tic_id"]
-        lc_files = sorted(
-            f for f in os.listdir(LIGHTCURVES)
-            if f.startswith(f"TIC_{tic}_") and f.endswith(".parquet")
-        )
-        if not lc_files:
+        tic_files = sorted(lc_index.get(tic, []))
+        if not tic_files:
             continue
-        df = pd.read_parquet(os.path.join(LIGHTCURVES, lc_files[0]))
+        df = pd.read_parquet(os.path.join(LIGHTCURVES, tic_files[0]))
         cinfo = candidate_map.get(tic, {})
         transit_info = {}
         for col in ["period", "duration", "depth", "epoch", "sde", "transit_snr"]:
@@ -77,11 +104,6 @@ def add_noise_augmentation(f, noise_level=0.15):
     return f + noise
 
 
-def add_time_jitter(t, jitter_level=0.001):
-    jitter = np.random.normal(0, jitter_level, len(t))
-    return t + jitter
-
-
 def generate_synthetic_from_template(template_df, label, n_per_template=5):
     t = template_df["time"].values.astype(np.float64)
     f = template_df["flux"].values.astype(np.float64)
@@ -92,41 +114,35 @@ def generate_synthetic_from_template(template_df, label, n_per_template=5):
     for _ in range(n_per_template):
         f_synth = f.copy()
         period = np.random.uniform(0.6, min(time_span * 0.8, 15.0))
-        depth = np.random.uniform(0.0001, 0.05)
         duration = period * np.random.uniform(0.01, 0.05)
 
         if label == 0:
-            depth = np.random.uniform(0.0001, 0.02)
+            depth = np.random.uniform(0.0005, 0.02)
             duration = period * np.random.uniform(0.01, 0.03)
-            ing = duration * 0.08
-            egr = duration * 0.08
         elif label == 1:
-            depth = np.random.uniform(0.005, 0.10)
+            depth = np.random.uniform(0.005, 0.12)
             duration = period * np.random.uniform(0.02, 0.07)
-            ing = duration * 0.05
-            egr = duration * 0.05
         elif label == 2:
             depth = np.random.uniform(0.0002, 0.008)
-            duration = period * np.random.uniform(0.008, 0.035)
-            ing = duration * 0.25
-            egr = duration * 0.15
+            duration = period * np.random.uniform(0.008, 0.04)
         elif label == 3:
-            n_modes = np.random.randint(1, 4)
+            n_modes = np.random.randint(2, 5)
             variability = np.zeros_like(t)
             for mi in range(n_modes):
-                amp = np.random.uniform(0.003, 0.04)
+                amp = np.random.uniform(0.002, 0.04)
                 p_var = np.random.uniform(0.3, min(time_span * 0.5, 10.0))
                 phase_var = np.random.uniform(0, p_var)
                 variability += amp * np.sin(2 * np.pi * (t - t[0]) / p_var + phase_var)
             f_synth += variability
             depth = 0
             duration = period * 0.01
-            ing = egr = 0
 
         if label in (0, 1, 2):
             epoch = t[0] + np.random.uniform(time_span * 0.1, time_span * 0.9)
-            transit_bottom = duration - ing - egr
             phases = (t - epoch + period / 2) % period - period / 2
+            transit_bottom = duration * 0.7 if label == 0 else duration * 0.3
+            ing = (duration - transit_bottom) / 2
+            egr = duration - transit_bottom - ing
 
             f_synth = f_synth.copy()
             in_transit = np.abs(phases) < duration / 2
@@ -134,41 +150,63 @@ def generate_synthetic_from_template(template_df, label, n_per_template=5):
                 transit_phases = phases[in_transit]
                 tp = np.abs(transit_phases)
                 depth_profile = np.ones_like(tp)
-                depth_profile[tp < transit_bottom / 2] = 0
-                mask_ing = (tp >= transit_bottom / 2) & (tp < transit_bottom / 2 + ing)
-                mask_egr = (tp >= transit_bottom / 2 + ing)
-                if mask_ing.any():
-                    depth_profile[mask_ing] = (tp[mask_ing] - transit_bottom / 2) / ing
-                if mask_egr.any():
-                    depth_profile[mask_egr] = 1 - (tp[mask_egr] - transit_bottom / 2 - ing) / egr
 
-                if label == 1:
+                if label in (0, 2):
+                    transit_bottom = duration * 0.75 if label == 0 else duration * 0.3
+                    ing = (duration - transit_bottom) / 2
+                    egr = duration - transit_bottom - ing
+                    flat_start = transit_bottom / 2
+                    depth_profile[tp < flat_start] = 0
+                    mask_ing = (tp >= flat_start) & (tp < flat_start + ing)
+                    mask_egr = (tp >= flat_start + ing)
+                    if mask_ing.any():
+                        depth_profile[mask_ing] = (tp[mask_ing] - flat_start) / ing
+                    if mask_egr.any():
+                        depth_profile[mask_egr] = 1 - (tp[mask_egr] - flat_start - ing) / egr
+                else:
+                    depth_profile = tp / (duration / 2)
                     depth_profile = np.sqrt(depth_profile)
+
+                    if np.random.random() < 0.4:
+                        sec_shift = period / 2
+                        sec_phases = (t - epoch + sec_shift + period / 2) % period - period / 2
+                        in_sec = np.abs(sec_phases) < duration / 2
+                        if in_sec.any():
+                            sec_tp = np.abs(sec_phases[in_sec])
+                            sec_profile = np.sqrt(sec_tp / (duration / 2))
+                            sec_depth = depth * np.random.uniform(0.3, 0.7)
+                            f_synth[in_sec] -= sec_depth * sec_profile
+
                 if label == 2:
                     depth_profile = depth_profile ** 1.5
+                    if np.random.random() < 0.3:
+                        lumpy = 1 + 0.2 * np.sin(tp * np.pi * np.random.uniform(3, 8))
+                        depth_profile = depth_profile * lumpy
 
                 depth_profile = np.clip(depth_profile, 0, 1)
                 f_synth[in_transit] -= depth * depth_profile
 
-        noise_level = np.random.uniform(0.1, 0.4)
+        noise_level = np.random.uniform(0.08, 0.35)
         if label == 2:
             noise_level = np.random.uniform(0.2, 0.6)
             hf_noise = np.random.normal(0, np.std(f_synth) * 0.1, len(f_synth))
             f_synth += hf_noise
+            if np.random.random() < 0.3:
+                f_synth += np.linspace(0, np.random.uniform(-0.003, 0.003), len(t))
         f_synth = add_noise_augmentation(f_synth, noise_level)
 
         if label == 0:
-            sde = np.random.uniform(6, 18)
-            snr = np.random.uniform(8, 25)
+            sde = np.random.uniform(6, 20)
+            snr = np.random.uniform(8, 30)
         elif label == 1:
-            sde = np.random.uniform(4, 12)
-            snr = np.random.uniform(3, 12)
+            sde = np.random.uniform(4, 14)
+            snr = np.random.uniform(3, 14)
         elif label == 2:
-            sde = np.random.uniform(2, 8)
-            snr = np.random.uniform(1.5, 6)
+            sde = np.random.uniform(1.5, 9)
+            snr = np.random.uniform(1.0, 7)
         else:
-            sde = np.random.uniform(2, 8)
-            snr = np.random.uniform(1, 6)
+            sde = np.random.uniform(1.5, 9)
+            snr = np.random.uniform(0.5, 7)
 
         transit_info = {"period": period, "duration": duration,
                         "depth": float(np.median(f) - np.min(f_synth)),
@@ -184,7 +222,7 @@ def generate_synthetic_from_template(template_df, label, n_per_template=5):
     return records
 
 
-def generate_augmented_data(real_records, multiplier=20):
+def generate_augmented_data(real_records, multiplier=30):
     lc_files = sorted(os.listdir(LIGHTCURVES))
     template_dfs = {}
     for lf in lc_files:
@@ -198,13 +236,14 @@ def generate_augmented_data(real_records, multiplier=20):
     target_per_class = max_count * multiplier
 
     synthetic = []
+    n_templates_total = max(1, len(template_dfs) // 6)
     for label_val, name in LABEL_MAP.items():
         n_real = label_counts.get(label_val, 0)
         needed = target_per_class - n_real
         if needed <= 0:
             continue
-        n_templates = max(1, len(template_dfs) // 4)
-        n_per = max(1, needed // n_templates)
+        n_templates = min(n_templates_total, len(template_dfs))
+        n_per = max(3, needed // n_templates)
         for lf in list(template_dfs.keys())[:n_templates]:
             df = template_dfs[lf]
             syn = generate_synthetic_from_template(df, label_val, n_per_template=n_per)
@@ -213,11 +252,21 @@ def generate_augmented_data(real_records, multiplier=20):
     all_records = []
     for r in real_records:
         all_records.append({"features": r["features"], "label": r["label"]})
+        for _ in range(5):
+            noisy_feats = r["features"] + np.random.normal(0, 0.005, size=r["features"].shape)
+            all_records.append({"features": noisy_feats, "label": r["label"]})
     all_records.extend(synthetic)
 
     X = np.stack([r["features"] for r in all_records])
     y = np.array([r["label"] for r in all_records])
     return X, y, len(real_records)
+
+
+def remove_low_variance_features(X, threshold=0.01):
+    selector = VarianceThreshold(threshold=threshold)
+    X_reduced = selector.fit_transform(X)
+    kept_mask = selector.get_support()
+    return X_reduced, kept_mask
 
 
 def train():
@@ -230,7 +279,7 @@ def train():
     print(f"  Class distribution: {label_dist}")
 
     print("Generating augmented data...")
-    X, y, n_real = generate_augmented_data(real, multiplier=30)
+    X, y, n_real = generate_augmented_data(real, multiplier=20)
     print(f"  Total samples: {len(X)} (real: {n_real}, synthetic: {len(X) - n_real})")
     print(f"  Class distribution: {dict(zip(*np.unique(y, return_counts=True)))}")
 
@@ -247,21 +296,25 @@ def train():
     best_model = None
     best_score = 0
 
+    class_counts = np.bincount(y_enc)
+    class_weights = torch.FloatTensor(len(class_counts) / (class_counts + 1e-6))
+    class_weights = class_weights / class_weights.sum() * len(class_counts)
+
     for fold, (train_idx, val_idx) in enumerate(skf.split(X_scaled, y_enc)):
         X_tr, X_val = X_scaled[train_idx], X_scaled[val_idx]
         y_tr, y_val = y_enc[train_idx], y_enc[val_idx]
 
         model = TransitClassifier(X_scaled.shape[1], n_classes)
-        criterion = nn.CrossEntropyLoss()
-        optimizer = optim.AdamW(model.parameters(), lr=5e-4, weight_decay=1e-3)
-        scheduler = optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode="min", factor=0.5, patience=8
+        criterion = LabelSmoothCrossEntropy(smoothing=0.1)
+        optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=5e-3)
+        scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(
+            optimizer, T_0=10, T_mult=2, eta_min=1e-6
         )
 
         train_t = TensorDataset(torch.FloatTensor(X_tr), torch.LongTensor(y_tr))
         val_t = TensorDataset(torch.FloatTensor(X_val), torch.LongTensor(y_val))
-        train_loader = DataLoader(train_t, batch_size=32, shuffle=True, drop_last=True)
-        val_loader = DataLoader(val_t, batch_size=32, drop_last=False)
+        train_loader = DataLoader(train_t, batch_size=64, shuffle=True, drop_last=True)
+        val_loader = DataLoader(val_t, batch_size=64, drop_last=False)
 
         best_val_acc = 0
         patience = 0
@@ -281,7 +334,7 @@ def train():
                 val_acc = accuracy_score(y_val, val_pred)
                 val_loss = criterion(val_out, torch.LongTensor(y_val)).item()
 
-            scheduler.step(val_loss)
+            scheduler.step(epoch)
 
             if val_acc > best_val_acc:
                 best_val_acc = val_acc
@@ -291,7 +344,7 @@ def train():
                     best_model = model.state_dict().copy()
             else:
                 patience += 1
-                if patience >= 15:
+                if patience >= 20:
                     break
 
         fold_scores.append(best_val_acc)
@@ -310,14 +363,16 @@ def train_final_model(X_scaled, y_enc, le, scaler):
     )
 
     model = TransitClassifier(X_scaled.shape[1], len(le.classes_))
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.AdamW(model.parameters(), lr=5e-4, weight_decay=1e-3)
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode="min", factor=0.5, patience=8)
+    criterion = LabelSmoothCrossEntropy(smoothing=0.1)
+    optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=5e-3)
+    scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(
+        optimizer, T_0=10, T_mult=2, eta_min=1e-6
+    )
 
     train_t = TensorDataset(torch.FloatTensor(X_train), torch.LongTensor(y_train))
     test_t = TensorDataset(torch.FloatTensor(X_test), torch.LongTensor(y_test))
-    train_loader = DataLoader(train_t, batch_size=32, shuffle=True, drop_last=True)
-    test_loader = DataLoader(test_t, batch_size=32, drop_last=False)
+    train_loader = DataLoader(train_t, batch_size=64, shuffle=True, drop_last=True)
+    test_loader = DataLoader(test_t, batch_size=64, drop_last=False)
 
     best_test_acc = 0
     patience = 0
@@ -339,7 +394,7 @@ def train_final_model(X_scaled, y_enc, le, scaler):
             test_f1 = f1_score(y_test, test_pred, average="weighted")
             test_loss = criterion(test_out, torch.LongTensor(y_test)).item()
 
-        scheduler.step(test_loss)
+        scheduler.step(epoch)
 
         if test_acc > best_test_acc:
             best_test_acc = test_acc
@@ -347,7 +402,7 @@ def train_final_model(X_scaled, y_enc, le, scaler):
             torch.save(model.state_dict(), os.path.join(MODELS, "best_model.pth"))
         else:
             patience += 1
-            if patience >= 20:
+            if patience >= 25:
                 break
 
         if epoch % 20 == 0:

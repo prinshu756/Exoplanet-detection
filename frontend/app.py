@@ -16,20 +16,29 @@ ALL_CANDIDATES = []
 PREDICTIONS = {}
 CAND_MAP = {}
 CLASS_SUMMARY = {"total": 0, "nn_counts": {}}
+_CANDIDATES_LOADED = False
 analyze_light_curve = None
 
-try:
-    from predictions import predict_candidates, analyze_light_curve as _alc, classification_summary
-    analyze_light_curve = _alc
-    ALL_CANDIDATES, PREDICTIONS = predict_candidates()
-    CAND_MAP = {}
-    for c in ALL_CANDIDATES:
-        tid = c.get("tic_id")
-        if tid is not None:
-            CAND_MAP[tid] = c
-    CLASS_SUMMARY = classification_summary(candidates=ALL_CANDIDATES, predictions=PREDICTIONS)
-except Exception as e:
-    print(f" ! Model loading: {e}")
+from predictions import analyze_light_curve as _alc
+analyze_light_curve = _alc
+
+
+def _ensure_candidates():
+    global ALL_CANDIDATES, PREDICTIONS, CAND_MAP, CLASS_SUMMARY, _CANDIDATES_LOADED
+    if _CANDIDATES_LOADED:
+        return
+    _CANDIDATES_LOADED = True
+    try:
+        from predictions import predict_candidates, classification_summary
+        ALL_CANDIDATES, PREDICTIONS = predict_candidates()
+        CAND_MAP = {}
+        for c in ALL_CANDIDATES:
+            tid = c.get("tic_id")
+            if tid is not None:
+                CAND_MAP[tid] = c
+        CLASS_SUMMARY = classification_summary(candidates=ALL_CANDIDATES, predictions=PREDICTIONS)
+    except Exception as e:
+        print(f" ! Model/candidate loading: {e}")
 
 
 def load_json(rel_path):
@@ -42,6 +51,7 @@ def load_json(rel_path):
 
 @app.route("/")
 def index():
+    _ensure_candidates()
     return render_template(
         "index.html",
         candidates_json=json.dumps(ALL_CANDIDATES),
@@ -51,11 +61,13 @@ def index():
 
 @app.route("/candidates")
 def candidates_list():
+    _ensure_candidates()
     return render_template("candidates.html", candidates=ALL_CANDIDATES)
 
 
 @app.route("/candidates/<int:tic_id>")
 def candidate_detail(tic_id):
+    _ensure_candidates()
     c = CAND_MAP.get(tic_id)
     if c is None:
         return "<h1>Not found</h1><p><a href='/candidates'>Back</a></p>", 404
@@ -64,11 +76,13 @@ def candidate_detail(tic_id):
 
 @app.route("/api/candidates")
 def api_candidates():
+    _ensure_candidates()
     return jsonify(ALL_CANDIDATES)
 
 
 @app.route("/api/predictions")
 def api_predictions():
+    _ensure_candidates()
     return jsonify({str(k): v for k, v in PREDICTIONS.items()})
 
 
@@ -104,6 +118,10 @@ def api_analyze():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    try:
+        _ensure_candidates()
+    except Exception as e:
+        print(f" ! Warning: candidate loading deferred: {e}")
     print(f" * {len(ALL_CANDIDATES)} candidates, {len(PREDICTIONS)} with predictions")
     print(f" * Summary: {CLASS_SUMMARY}")
     print(f" * Running on http://localhost:{port}")
