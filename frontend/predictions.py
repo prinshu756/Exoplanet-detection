@@ -189,9 +189,18 @@ def analyze_light_curve(file_path, ext):
     if missing:
         return {"error": f"Missing columns: {missing}. Need: time, flux"}
 
-    t_raw = lc["time"].values.astype(np.float64)
-    f_raw = lc["flux"].values.astype(np.float64)
+    t_raw = pd.to_numeric(lc["time"], errors="coerce").values.astype(np.float64)
+    f_raw = pd.to_numeric(lc["flux"], errors="coerce").values.astype(np.float64)
+
+    valid = ~(np.isnan(t_raw) | np.isnan(f_raw))
+    if valid.sum() < 3:
+        return {"error": "Not enough valid data points. Need at least 3 non-NaN time/flux pairs."}
+
+    lc = lc.loc[valid]
+    t_raw = t_raw[valid]
+    f_raw = f_raw[valid]
     f = f_raw / np.median(f_raw)
+    lc["time"] = t_raw
     lc["flux"] = f
 
     result = {
@@ -226,10 +235,9 @@ def analyze_light_curve(file_path, ext):
         }
 
     m = get_models()
-    feats = extract_features_from_lc_df(lc, transit_info)
-    arr = features_to_array(feats, m["feature_cols"]).reshape(1, -1)
-
     try:
+        feats = extract_features_from_lc_df(lc, transit_info)
+        arr = features_to_array(feats, m["feature_cols"]).reshape(1, -1)
         X_scaled = m["scaler"].transform(arr)
         with torch.no_grad():
             X_tensor = torch.tensor(X_scaled, dtype=torch.float32)

@@ -32,6 +32,8 @@ def compute_statistical_features(flux):
         return {}
 
     median_f = np.median(f)
+    skew = float(pd.Series(f).skew()) if len(f) >= 3 else 0.0
+    kurt = float(pd.Series(f).kurtosis()) if len(f) >= 4 else 0.0
     return {
         "mean_flux": float(np.mean(f)),
         "median_flux": float(median_f),
@@ -42,8 +44,8 @@ def compute_statistical_features(flux):
         "dynamic_range": float(np.max(f) - np.min(f)),
         "rms": float(np.sqrt(np.mean(f ** 2))),
         "mad": float(np.median(np.abs(f - median_f))),
-        "skewness": float(pd.Series(f).skew()),
-        "kurtosis": float(pd.Series(f).kurtosis()),
+        "skewness": skew,
+        "kurtosis": kurt,
         "percentile_5": float(np.percentile(f, 5)),
         "percentile_25": float(np.percentile(f, 25)),
         "percentile_75": float(np.percentile(f, 75)),
@@ -63,16 +65,7 @@ def compute_temporal_features(flux, time):
     time_span = t[-1] - t[0]
     median_cad = np.median(diffs)
 
-    f = flux[~np.isnan(flux)]
-    autocorr_lag1 = float(np.corrcoef(f[:-1], f[1:])[0, 1]) if len(f) > 10 else 0.0
-    p5, p95 = np.percentile(f, 5), np.percentile(f, 95)
-    flux_range_ratio = float((p95 - p5) / (np.max(f) - np.min(f) + 1e-12))
-    window = max(3, len(f) // 20)
-    roll_std = pd.Series(f).rolling(window=window, center=True).std().values
-    roll_std = roll_std[~np.isnan(roll_std)]
-    rolling_std_ratio = float(np.mean(roll_std) / (np.std(f) + 1e-12)) if len(roll_std) > 0 else 0.0
-
-    return {
+    features = {
         "observation_duration_days": float(time_span),
         "num_observations": int(len(t)),
         "median_cadence_days": float(median_cad),
@@ -83,10 +76,24 @@ def compute_temporal_features(flux, time):
         "gap_fraction": float(np.sum(diffs[diffs > 1.5 * median_cad]) / time_span) if time_span > 0 else 0,
         "sampling_density": float(len(t) / time_span) if time_span > 0 else 0,
         "time_span_hours": float(time_span * 24),
-        "autocorr_lag1": autocorr_lag1,
-        "flux_range_ratio": flux_range_ratio,
-        "rolling_std_ratio": rolling_std_ratio,
+        "autocorr_lag1": 0.0,
+        "flux_range_ratio": 0.0,
+        "rolling_std_ratio": 0.0,
     }
+
+    f = flux[~np.isnan(flux)]
+    if len(f) == 0:
+        return features
+
+    features["autocorr_lag1"] = float(np.corrcoef(f[:-1], f[1:])[0, 1]) if len(f) > 10 else 0.0
+    p5, p95 = np.percentile(f, 5), np.percentile(f, 95)
+    features["flux_range_ratio"] = float((p95 - p5) / (np.max(f) - np.min(f) + 1e-12))
+    window = max(3, len(f) // 20)
+    roll_std = pd.Series(f).rolling(window=window, center=True).std().values
+    roll_std = roll_std[~np.isnan(roll_std)]
+    features["rolling_std_ratio"] = float(np.mean(roll_std) / (np.std(f) + 1e-12)) if len(roll_std) > 0 else 0.0
+
+    return features
 
 
 def compute_frequency_features(flux, time):
@@ -94,12 +101,20 @@ def compute_frequency_features(flux, time):
     if len(f) < 10:
         return {}
 
+    t = time[~np.isnan(time)]
+    if len(t) < 2:
+        return {}
+
+    cad = np.nanmedian(np.diff(t))
+    if not np.isfinite(cad) or cad <= 0:
+        return {}
+
     n = len(f)
     window = np.hanning(n)
     f_detrend = f - np.mean(f)
     fft_vals = np.fft.rfft(f_detrend * window)
     power = np.abs(fft_vals) ** 2
-    freqs = np.fft.rfftfreq(n, d=np.nanmedian(np.diff(time)))
+    freqs = np.fft.rfftfreq(n, d=cad)
     freqs = freqs[1:]
     power = power[1:]
 

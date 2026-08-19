@@ -9,17 +9,6 @@
     </p>
   </div>
 
-  {% if summary %}
-  <div class="card" style="padding: 1.25rem;">
-    <div class="stats-grid">
-      <div class="stat-cell"><div class="stat-label">Candidates</div><div class="stat-value">{{ summary.total }}</div></div>
-      <div class="stat-cell"><div class="stat-label">Planets</div><div class="stat-value">{{ summary.nn_counts.get('Planet', 0) }}</div></div>
-      <div class="stat-cell"><div class="stat-label">EB</div><div class="stat-value">{{ summary.nn_counts.get('Eclipsing Binary', 0) }}</div></div>
-      <div class="stat-cell"><div class="stat-label">Blend/Variable</div><div class="stat-value">{{ summary.nn_counts.get('Background Blend', 0) + summary.nn_counts.get('Stellar Variability', 0) }}</div></div>
-    </div>
-  </div>
-  {% endif %}
-
   <div class="space-y-4">
     <input type="file" id="fileInput" accept=".parquet,.fits,.csv" style="display:none">
     <div class="upload-zone" id="uploadZone">
