@@ -26,6 +26,9 @@ LABEL_MAP = {0: "Planet", 1: "Eclipsing Binary", 2: "Background Blend", 3: "Stel
 torch.manual_seed(42)
 np.random.seed(42)
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Using device: {DEVICE}")
+
 
 class LabelSmoothCrossEntropy(nn.Module):
     def __init__(self, smoothing=0.1):
@@ -305,6 +308,7 @@ def train():
         y_tr, y_val = y_enc[train_idx], y_enc[val_idx]
 
         model = TransitClassifier(X_scaled.shape[1], n_classes)
+        model.to(DEVICE)
         criterion = LabelSmoothCrossEntropy(smoothing=0.1)
         optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=5e-3)
         scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(
@@ -321,6 +325,7 @@ def train():
         for epoch in range(100):
             model.train()
             for bx, by in train_loader:
+                bx, by = bx.to(DEVICE), by.to(DEVICE)
                 optimizer.zero_grad()
                 loss = criterion(model(bx), by)
                 loss.backward()
@@ -329,10 +334,10 @@ def train():
 
             model.eval()
             with torch.no_grad():
-                val_out = model(torch.FloatTensor(X_val))
-                val_pred = val_out.argmax(dim=1).numpy()
+                val_out = model(torch.FloatTensor(X_val).to(DEVICE))
+                val_pred = val_out.argmax(dim=1).cpu().numpy()
                 val_acc = accuracy_score(y_val, val_pred)
-                val_loss = criterion(val_out, torch.LongTensor(y_val)).item()
+                val_loss = criterion(val_out, torch.LongTensor(y_val).to(DEVICE)).item()
 
             scheduler.step(epoch)
 
@@ -363,6 +368,7 @@ def train_final_model(X_scaled, y_enc, le, scaler):
     )
 
     model = TransitClassifier(X_scaled.shape[1], len(le.classes_))
+    model.to(DEVICE)
     criterion = LabelSmoothCrossEntropy(smoothing=0.1)
     optimizer = optim.AdamW(model.parameters(), lr=3e-4, weight_decay=5e-3)
     scheduler = optim.lr_scheduler.CosineAnnealingWarmRestarts(
@@ -380,6 +386,7 @@ def train_final_model(X_scaled, y_enc, le, scaler):
     for epoch in range(150):
         model.train()
         for bx, by in train_loader:
+            bx, by = bx.to(DEVICE), by.to(DEVICE)
             optimizer.zero_grad()
             loss = criterion(model(bx), by)
             loss.backward()
@@ -388,11 +395,11 @@ def train_final_model(X_scaled, y_enc, le, scaler):
 
         model.eval()
         with torch.no_grad():
-            test_out = model(torch.FloatTensor(X_test))
-            test_pred = test_out.argmax(dim=1).numpy()
+            test_out = model(torch.FloatTensor(X_test).to(DEVICE))
+            test_pred = test_out.argmax(dim=1).cpu().numpy()
             test_acc = accuracy_score(y_test, test_pred)
             test_f1 = f1_score(y_test, test_pred, average="weighted")
-            test_loss = criterion(test_out, torch.LongTensor(y_test)).item()
+            test_loss = criterion(test_out, torch.LongTensor(y_test).to(DEVICE)).item()
 
         scheduler.step(epoch)
 
@@ -408,10 +415,10 @@ def train_final_model(X_scaled, y_enc, le, scaler):
         if epoch % 20 == 0:
             print(f"  Epoch {epoch}: test acc = {test_acc:.4f}, f1 = {test_f1:.4f}")
 
-    model.load_state_dict(torch.load(os.path.join(MODELS, "best_model.pth")))
+    model.load_state_dict(torch.load(os.path.join(MODELS, "best_model.pth"), map_location=DEVICE))
     model.eval()
     with torch.no_grad():
-        final_pred = model(torch.FloatTensor(X_test)).argmax(dim=1).numpy()
+        final_pred = model(torch.FloatTensor(X_test).to(DEVICE)).argmax(dim=1).cpu().numpy()
     print(f"\nFinal test accuracy: {best_test_acc:.4f}")
     print(f"Final test F1: {f1_score(y_test, final_pred, average='weighted'):.4f}")
     print(f"\nClassification report:")

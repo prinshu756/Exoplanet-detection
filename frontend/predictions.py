@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 
 from feature_utils import extract_features_from_lc_df, features_to_array, FEATURE_NAMES
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS = os.path.join(ROOT, "models")
 OUTPUTS = os.path.join(ROOT, "outputs")
@@ -66,8 +68,9 @@ def get_models():
     nn_model = TransitClassifier()
     nn_model.load_state_dict(
         torch.load(os.path.join(MODELS, "best_model.pth"),
-                   map_location="cpu")
+                   map_location=DEVICE)
     )
+    nn_model.to(DEVICE)
     nn_model.eval()
 
     scaler = joblib.load(os.path.join(MODELS, "scaler.pkl"))
@@ -155,9 +158,9 @@ def predict_candidates():
 def _predict_from_features(X, tic_ids, m):
     X_scaled = m["scaler"].transform(X)
     with torch.no_grad():
-        X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
+        X_tensor = torch.tensor(X_scaled, dtype=torch.float32, device=DEVICE)
         logits = m["nn"](X_tensor)
-        proba = torch.softmax(logits, dim=1).numpy()
+        proba = torch.softmax(logits, dim=1).cpu().numpy()
     preds = proba.argmax(axis=1)
 
     predictions = {}
@@ -240,9 +243,9 @@ def analyze_light_curve(file_path, ext):
         arr = features_to_array(feats, m["feature_cols"]).reshape(1, -1)
         X_scaled = m["scaler"].transform(arr)
         with torch.no_grad():
-            X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
+            X_tensor = torch.tensor(X_scaled, dtype=torch.float32, device=DEVICE)
             logits = m["nn"](X_tensor)
-            proba = torch.softmax(logits, dim=1).numpy()[0]
+            proba = torch.softmax(logits, dim=1).cpu().numpy()[0]
         pred = int(proba.argmax())
         result["prediction"] = LABEL_MAP.get(pred, "Unknown")
         result["probabilities"] = {
