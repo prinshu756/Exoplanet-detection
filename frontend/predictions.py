@@ -1,4 +1,4 @@
-import base64, io, json, os, warnings
+import base64, io, json, os, shutil, subprocess, sys, tempfile, warnings
 warnings.filterwarnings("ignore")
 
 import numpy as np
@@ -176,6 +176,32 @@ def _predict_from_features(X, tic_ids, m):
     return [], predictions
 
 
+def _run_tls_subprocess(t, f, period_min=0.5, period_max=50.0):
+    worker = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tls_worker.py")
+    n_threads = int(os.environ.get("TLS_THREADS", "8"))
+    tmpdir = None
+    try:
+        tmpdir = tempfile.mkdtemp(prefix="tls_")
+        in_path = os.path.join(tmpdir, "in.npz")
+        out_path = os.path.join(tmpdir, "out.json")
+        np.savez(in_path, time=t, flux=f, period_min=period_min,
+                 period_max=period_max, use_threads=n_threads)
+        proc = subprocess.run(
+            [sys.executable, worker, in_path, out_path],
+            capture_output=True, text=True, timeout=900,
+        )
+        if proc.returncode != 0:
+            raise RuntimeError((proc.stderr or "")[-3000:] or
+                               f"TLS worker exited with code {proc.returncode}")
+        if not os.path.exists(out_path):
+            raise RuntimeError("TLS worker produced no output")
+        with open(out_path, encoding="utf-8") as fh:
+            return json.load(fh)
+    finally:
+        if tmpdir:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+
+
 def analyze_light_curve(file_path, ext):
     if ext == "parquet":
         lc = pd.read_parquet(file_path)
@@ -217,18 +243,20 @@ def analyze_light_curve(file_path, ext):
     transit_info = None
     tls_res = None
     try:
-        from transitleastsquares import transitleastsquares
-        model = transitleastsquares(t_raw, f)
-        tls_res = model.power(period_min=0.5, period_max=50)
-        result["tls_period"] = float(tls_res.period)
-        result["tls_sde"] = float(tls_res.SDE)
+        from types import SimpleNamespace
+        res = _run_tls_subprocess(t_raw, f)
+        if "error" in res:
+            raise RuntimeError(res["error"])
+        tls_res = SimpleNamespace(**res)
+        result["tls_period"] = float(res["period"])
+        result["tls_sde"] = float(res["sde"])
         transit_info = {
-            "period": float(tls_res.period),
-            "duration": float(getattr(tls_res, "duration", 0.0)),
-            "depth": float(getattr(tls_res, "depth", 0.0)),
-            "epoch": float(getattr(tls_res, "epoch", t_raw[0])),
-            "sde": float(getattr(tls_res, "SDE", 0.0)),
-            "transit_snr": float(getattr(tls_res, "snr", 0.0)),
+            "period": float(res["period"]),
+            "duration": float(res.get("duration", 0.0)),
+            "depth": float(res.get("depth", 0.0)),
+            "epoch": float(res.get("epoch", t_raw[0])),
+            "sde": float(res.get("sde", 0.0)),
+            "transit_snr": float(res.get("snr", 0.0)),
         }
     except Exception as e:
         result["tls_error"] = str(e)

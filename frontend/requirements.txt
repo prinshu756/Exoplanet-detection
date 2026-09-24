@@ -1,7 +1,22 @@
+# Web framework
 flask>=3.0
-numpy>=1.24
+
+# Numerics / dataframes
+numpy>=1.24,<3
 pandas>=2.0
-joblib>=1.2
-transitleastsquares>=1.0
-astropy>=5.3
+scipy>=1.10
 scikit-learn>=1.2
+pyarrow>=12.0
+
+# Deep learning
+torch>=2.0
+joblib>=1.2
+
+# Exoplanet transit analysis
+transitleastsquares>=1.32
+numba>=0.58
+astropy>=5.3
+
+# Plotting
+matplotlib>=3.7
+tqdm>=4.65
